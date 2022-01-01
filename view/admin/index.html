@@ -1,0 +1,187 @@
+<?php
+  require __DIR__.'/head.html';
+  require __DIR__.'/header.html';
+  $File_Ming = 'index';
+  require __DIR__.'/nav.html';
+  ?>
+<script src="/assets/other/js/echarts.min.js"></script>
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="">后台首页</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small danger coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                <div class="info">
+                    <h4>总用户数</h4>
+                    <p><b><?php echo reset($data['total']);?>人</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-user fa-3x"></i>
+                <div class="info">
+                    <h4>已验证用户</h4>
+                    <p><b><?php echo reset($data['ok']);?>人</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small info coloured-icon"><i class="icon fa fa-male fa-3x"></i>
+                <div class="info">
+                    <h4>今日注册</h4>
+                    <p><b><?php echo end($data['register']);?>人</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small warning coloured-icon"><i class="icon fa fa-money"></i>
+                <div class="info">
+                    <h4>今天收益</h4>
+                    <p><b><?php echo end($data['profit']);?>元</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-md-7 ptch-index-info">
+
+            <div class="layui-card" style="height: auto;">
+                <div class="layui-card-header">
+                    注册和收益统计
+                </div>
+                <div class="layui-card-body layui-text layadmin-text">
+                    <div id="register" style="height:300px;"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-5 ptch-index-info">
+            <div class="layui-card">
+                <div class="layui-card-header">服务器信息</div>
+                <div class="layui-card-body layui-text ptch-overflow-x">
+                <?php echo(php_uname()); ?>
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="100">
+                            </col>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <td>PHP运行版本</td>
+                                <td>
+                                    <?php echo PHP_VERSION ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>服务器读写权限 </td>
+                                <td><?php echo is_writable('../config/webset.php') ? '<span style="color: green;">可写</span>' : '<span style="color: red;">不可写</span>' ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>接口数量</td>
+                                <td style="padding-bottom: 0;">
+                                    <?php echo reset(reset($data["api"])); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>源码当前版本</td>
+                                <td style="padding-bottom: 0;">
+                                    v<?php echo APP_BB;?>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <?php  require __DIR__.'/fooer.html'; ?>
+    <script>
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#test-carousel-normal',
+                width: '100%' //设置容器宽度
+                    ,
+                height: '238px' //设置容器宽度
+                    ,
+                arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+        
+        
+        var myChart = echarts.init(document.getElementById('register'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '',
+                subtext: '近30天赚了：<?php $m = 0;
+        foreach ($data['profit'] as $value) {
+            $m = $m + $value;
+        }
+        echo $m;
+        ?>块大洋',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: {readOnly: false},
+                    saveAsImage: {}
+                }
+            },
+            legend: {
+                data: ['注册人数', '当天收益'],
+                left: 10
+            },
+            xAxis: {
+                data: [<?php
+                foreach($data['register'] as $day=>$num)
+                {
+                    $days .= '"第'.$day.'天",';
+                }
+                echo rtrim($days, ',')?>]
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: '注册人数',
+                stack: '总量',
+                data: [<?php
+                foreach($data['register'] as $key=>$num)
+                {
+                    $nums .= $num.',';
+                }
+                echo rtrim($nums, ',')?>],
+                type: 'line'
+            },
+            {
+                name: '当天收益',
+                stack: '总量',
+                data: [<?php
+                foreach($data['profit'] as $key=>$money)
+                {
+                    $moneys .= $money.',';
+                }
+                echo rtrim($moneys, ',')?>],
+                type: 'line'
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>

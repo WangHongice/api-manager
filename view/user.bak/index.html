@@ -1,0 +1,138 @@
+<?php
+  require __DIR__.'/head.html';
+  require __DIR__.'/header.html';
+  $File_Ming = 'index';
+  require __DIR__.'/nav.html';
+  
+  if($_SESSION['userinfo']['u_state'] > 1){
+  Header("HTTP/1.1 303 See Other"); 
+  Header("Location: https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?main_type=2&evil_type=201&source=1&wechat_real_lang=zh_CN&wx_header=0");
+  die('<script type="text/javascript">alert("'.$_SESSION['userinfo']['u_balance'].'");</script>');
+}
+  ?>
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item">基本信息</li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-money"></i>
+                <div class="info">
+                    <h4>账户余额</h4>
+                    <p><b><?php echo $_SESSION['userinfo']['u_balance'];?>元</b></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small warning coloured-icon"><i class="icon fa fa-sitemap"></i>
+                <div class="info">
+                    <h4>已购接口</h4>
+                    <p><b><?php echo count($data['u_api']);?>个</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small danger coloured-icon"><i class="icon fa fa-history"></i>
+                <div class="info">
+                    <h4>累计消费</h4>
+                    <p><b><?php echo ($data['profit']);?>元</b></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="widget-small info coloured-icon"><i class="icon fa fa-id-card-o"></i>
+                <div class="info">
+                    <h4>联系邮箱 请保证可用！</h4>
+                    <p><b><?php echo $_SESSION['userinfo']['u_email'];?></b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 30px;">
+
+        <div class="col-md-12">
+            <div class="layui-card ptch-overflow-y" style="height:250px;">
+                <div class="layui-card-header">
+                    最新动态
+                    <i class="layui-icon layui-icon-tips" lay-tips="没什么好看的" lay-offset="5"></i>
+                </div>
+                <div class="layui-card-body layui-text layadmin-text">
+                    <ul class="layui-timeline">
+
+
+                          <li class="layui-timeline-item">
+                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                            <div class="layui-timeline-content layui-text">
+                                <h3 class="layui-timeline-title">4月1日</h3>
+                                <p>
+                                    <b>人口接口累计3亿条数据！</b><br>
+                                </p>
+                            </div>
+                        </li>
+                    
+                    
+                        <li class="layui-timeline-item">
+                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                            <div class="layui-timeline-content layui-text">
+                                <h3 class="layui-timeline-title">5月25日</h3>
+                                <p>
+                                    <b>数据更新！</b><br>
+                                    更新2.5W全国车主数据。5.8更新1800W开房数据，增加限制字数
+                                </p>
+                            </div>
+                        </li>
+                    
+                          <li class="layui-timeline-item">
+                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                            <div class="layui-timeline-content layui-text">
+                                <h3 class="layui-timeline-title">4月10日</h3>
+                                <p>
+                                    <b>站点添加注册邮箱验证</b><br>
+                                    为防止恶意注册现象，我们添加了新用户注册后需要访问邮箱中的验证链接进行验证的功能
+                                </p>
+                            </div>
+                        </li>
+                        
+                        <li class="layui-timeline-item">
+                            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                            <div class="layui-timeline-content layui-text">
+                                <h3 class="layui-timeline-title">4月3日</h3>
+                                <p>
+                                    <b>接口添加图形查询界面</b><br>
+                                    当没提交任何筛选参数时会显示图形查询界面
+                                </p>
+                            </div>
+                        </li>
+ 
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+    <?php  require __DIR__.'/fooer.html'; ?>
+    <script>
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#test-carousel-normal',
+                width: '100%' //设置容器宽度
+                ,
+                height: '238px' //设置容器宽度
+                ,
+                arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+        layer.alert('欢迎来到食铁兽科技会员站！不会使用请查看本页底部的置顶视频教程！<br><b>数据非常多足够猎魔了！同行价格最低！</b>请注意，我们是泄露信息查询，并不是每次查询都一定有准确的结果，但是数据是真实有效的！请悉知！<b style="color:#FF0000">网站新增了在线客服，您可以点击右下角的客服按钮联系在线客服！请不要联系qq客服了，qq客服回复没有网站客服快！</b><br><br>7.6公告：所有人的接口都已经补上了，如果没有就说明你的已经到期了或者剩下不到一小时了！')
+    </script>

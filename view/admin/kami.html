@@ -1,0 +1,119 @@
+<?php
+  require __DIR__.'/head.html';
+  require __DIR__.'/header.html';
+  $File_Ming = 'kami';
+  require __DIR__.'/nav.html';
+  ?>
+
+<!-- 主体 -->
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item">订单记录</li>
+        </ul>
+    </div>
+    <style>
+
+    </style>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+
+
+                    <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                        <div class="row">
+
+                            <div class="col-sm-12 col-md-12">
+                                <form report-submit="false">
+                                    <div id="sampleTable_filter" class="dataTables_filter"><label>搜索:<input name="wd"
+                                                type="search" value="<?php echo $wd;?>"
+                                                class="form-control form-control-sm" placeholder=""
+                                                aria-controls="sampleTable"></label></div>
+                                </form>
+
+
+                            </div>
+                        </div>
+                        <div class="row row-table-scroll">
+                            <div class="col-sm-12">
+                                <table class="table table-hover table-bordered dataTable no-footer" id="" role="grid"
+                                    aria-describedby="sampleTable_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="sampleTable" rowspan="1"
+                                                colspan="1" aria-sort="ascending"
+                                                aria-label="ID: activate to sort column descending"
+                                                style="width: 35px;">ID</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1"
+                                                colspan="1" aria-label="卡密信息: activate to sort column ascending"
+                                                style="width: 158px;">卡密信息</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1"
+                                                colspan="1" aria-label="余额（元）: activate to sort column ascending"
+                                                style="width: 109px;">余额（元）</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1"
+                                                colspan="1" aria-label="使用状态: activate to sort column ascending"
+                                                style="width: 90px;">使用状态</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1"
+                                                colspan="1" aria-label="使用者: activate to sort column ascending"
+                                                style="width: 71px;">使用者</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1"
+                                                colspan="1" aria-label="添加时间: activate to sort column ascending"
+                                                style="width: 172px;">添加时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if(!empty($data)):
+                                            foreach($data as $k=>$v):?>
+                                        <tr role="row" class="odd">
+                                            <td class="sorting_1"><?php echo $v['a_k_id'];?></td>
+                                            <td><?php echo $v['a_k_content'];?></td>
+                                            <td><?php echo $v['a_k_money'];?></td>
+                                            <td><?php if($v['a_k_state']==1){echo '未使用';}else{ echo "已使用";}?></td>
+                                            <td><a href="./userinfo.html?wd=<?php echo $v['a_u_name'];?>"><?php echo $v['a_u_name'];?></a></td>
+                                            <td><?php echo $v['a_k_time'];?></td>
+                                        </tr>
+                                        <?php endforeach;
+                                        endif;?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">列表数据
+                                    <?php echo $paging; ?> 条 当前显示 1 到 100 条</div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="sampleTable_paginate">
+                                    <ul class="pagination">
+                                        <?php if($page>1) :?>
+                                        <li class="paginate_button page-item previous disabled</li>"
+                                            id="sampleTable_previous">
+                                            <a href="?page=<?php echo $page-1;?>" aria-controls="sampleTable"
+                                                data-dt-idx="0" tabindex="0" class="page-link">上一页</a>
+                                        </li>
+                                        <?php endif;?>
+                                        <li class="paginate_button page-item active"><a aria-controls="sampleTable"
+                                                data-dt-idx="1" tabindex="0" class="page-link"><?php echo $page;?></a>
+                                        </li>
+                                        <?php if($paging/10>1):?>
+                                        <li class="paginate_button page-item next" id="sampleTable_next">
+                                            <a href="?page=<?php echo $page+1;?>" aria-controls="sampleTable"
+                                                data-dt-idx="3" tabindex="0" class="page-link">下一页</a></li>
+                                        <?php endif;?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php  require __DIR__.'/fooer.html'; ?>
+    </body>
+
+    </html>

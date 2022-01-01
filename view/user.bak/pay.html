@@ -1,0 +1,169 @@
+<?php
+  require __DIR__.'/head.html';
+  require __DIR__.'/header.html';
+  $File_Ming = 'pay';
+  require __DIR__.'/nav.html';
+  ?>
+<link rel="stylesheet" type="text/css" href="/assets/other/css/userPay.css">
+<style>
+    a:link {
+        text-decoration: none;
+    }
+
+    a:active {
+        text-decoration: blink
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    a:visited {
+        text-decoration: none;
+    }
+
+    *,
+    :after,
+    :before {
+        /* -webkit-box-sizing: border-box; */
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .layui-text ul {
+        padding: 0;
+    }
+
+    .form-control {
+        height: 37px;
+    }
+
+    button,
+    html input[type=button],
+    input[type=reset],
+    input[type=submit] {
+        -webkit-appearance: button;
+        cursor: pointer;
+    }
+</style>
+
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item">自助充值</li>
+        </ul>
+    </div>
+
+    <div class="row" style="margin-bottom: 30px;">
+        <div class="col-md-12">
+            <div class="layui-card ptch-overflow-y">
+                <div class="layui-card-header">
+                    请输入充值卡密进行余额充值
+                </div>
+                <div class="layui-card-body layui-text layadmin-text">
+                    <section class="clearfix g-member">
+                        <form id="user-pay">
+                            <article class="clearfix mt10 m-round g-pay-ment g-bank-ct">
+                                <ul id="ulBankList">
+                                    <li class="gray6" style="width: 100%;padding: 5px 0px 0px 10px;height: auto;">
+                                        当前余额：
+                                        <label class="input" style="border: 0px solid #EAEAEA;font-size: 30px;">
+                                            <span style="border:0px"
+                                                class="form-control"><?php echo $_SESSION['userinfo']['u_balance'];?>元</span>
+                                        </label>
+                                        <input type="hidden" name="user"
+                                            value="<?php echo $_SESSION['userinfo']['u_name'];?>">
+                                        <input type="hidden" name="param" value="自助充值">
+                                    </li>
+
+                                    <li class="gray6" style="width: 100%;padding: 5px 0px 0px 10px;height: auto;">
+                                        余额充值：
+                                        <label class="input" style="border: 1px solid #EAEAEA;font-size:30px;">
+                                            <input class="form-control" type="text" name="kami" id="price"
+                                                placeholder="请输入充值卡密" value="" style="color: red;">
+                                        </label>
+                                    </li>
+                                </ul>
+                            </article>
+                            <!--值0表示卡密充值-->
+                            <input type="hidden" value="4" name="salt">
+                            <div class="mt10 f-Recharge-btn">
+                                <blockquote class="layui-elem-quote"
+                                    style="margin-top: 5px;border-left: 5px solid#77bd94;">
+                                    <p style="padding: 0;margin: 0;">充值说明:</p>
+                                    <span style="color:#e60c0c">
+                                        1.充值金额仅用于平台消费, 不支持提现
+                                        <br>
+                                        2.充值不到账请联系网站管理员核实
+                                        <br>
+                                        3.如点击充值后未跳转充值页面, 请刷新本页面重新操作即可
+                                        <br>
+                                    </span>
+                                </blockquote><br>
+ <div class="layui-row">
+    <div class="layui-col-xs6 layui-col-sm5 layui-col-md5 layui-col-lg4">
+        <button id="btnSubmit" type="button" class="btn btn-primary btn-block" style="max-width:150px">确认充值</button>
+    </div>
+    <div class="layui-col-xs6 layui-col-sm5 layui-col-md5 layui-col-lg4">
+        <a class="layui-btn layui-btn-danger" href="https://alidwz.cn/179p" target="_blank">》点我购买卡密《</a>
+        </div></div><br><br>有问题联系在线客服！
+                            </div>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <?php  require __DIR__.'/fooer.html'; ?>
+    <script>
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#test-carousel-normal',
+                width: '100%' //设置容器宽度
+                    ,
+                height: '238px' //设置容器宽度
+                    ,
+                arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+
+        $('#user-pay button').click(function () {
+            fd = new FormData(document.getElementById('user-pay'));
+            var loading = layer.load(2, { shade: 0.5,time:10000 });
+            $.ajax({
+                url: '/user/recharge',
+                type: "POST",
+                timeout: "10000",
+                dataType: "json",
+                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    layer.close(loading);
+                    if (data.code == "200") {
+                        layer.msg(data.msg, {
+                            time: 3000
+                        }, function () {
+                            location.reload();
+                        });
+                    } else {
+                        layer.alert(data.msg, {
+                        title: "错误 如有疑问请联系客服",
+                        icon: 5,
+                        time: 10000
+                        })
+                    }
+                },
+                error: function (XMLResponse) {
+                    layer.close(loading);
+                    layer.msg(XMLResponse.error);
+                }
+            });
+        });
+    </script>

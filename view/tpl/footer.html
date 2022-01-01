@@ -1,0 +1,87 @@
+<style>
+    #footer h4 {
+        margin-bottom: 15px;
+    }
+</style>
+<footer id="footer" class="footer hidden-print">
+    <div class="container">
+        <div class="row">
+
+            <div class="footer-about col-md-5 col-sm-12" id="about">
+                <?php echo $web['about'];?>
+                <p>
+                    自上线以来已经提供数 <span id="nums"><?php echo $count;?></span> 次 API 接口服务。
+                </p>
+                <p>
+                    累积调用：<?php echo $count;?> 次 · 稳定运行：<span id="y-day"></span> 天。
+                </p>
+
+            </div>
+
+            <div class="footer-links col-md-3 col-sm-12">
+                <h4>友情链接</h4>
+                <ul class="list-unstyled list-inline">
+                    <li><a href="http://sgk.xyz/#vip" target="_blank">食铁兽科技免费站</a>
+                    </li>
+                    <li>欢迎流量>1w的朋友交换友链！
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-techs col-md-4 col-sm-12">
+                <h4>联系我们</h4>
+                <p style="float: left;">
+                    <a href="<?php echo $web['url1'];?>" target="_blank">土豆群组</a>
+                    <a src="<?php echo $web['url2'];?>" target="_blank">电报群组</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="copy-right">
+        <?php echo $web['icp'];?>
+    </div>
+</footer>
+<script>
+  (function(d, w, c) {
+    var s = d.createElement('script');
+    w[c] = w[c] || function() {
+      (w[c].z = w[c].z || []).push(arguments);
+    };
+    s.async = true;
+    s.src = 'https://static.ahc.ink/hecong.js';
+    if (d.head) d.head.appendChild(s);
+  })(document, window, '_AIHECONG');
+  _AIHECONG('ini',{ channelId : '3Jho1R' });
+
+    //弹出登录页
+    function page_login() {
+        layer.open({
+            type: 2,
+            title: false,
+            shadeClose: true,
+            shade: false,
+            maxmin: false, //开启最大化最小化按钮
+            area: ['380px', '100%'],
+            offset: 'lb', //右下角弹出
+            content: '/user/login.html'
+        });
+    }
+
+    //建站时间
+    function show_date_time(t) {
+        window.setTimeout("show_date_time()", 1000);
+        BirthDay = new Date(t);
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        sectimeold = timeold / 1000;
+        secondsold = Math.floor(sectimeold);
+        msPerDay = 24 * 60 * 60 * 1000;
+        e_daysold = timeold / msPerDay;
+        daysold = Math.floor(e_daysold);
+        e_hrsold = (e_daysold - daysold) * 24;
+        return daysold;
+    }
+    $("#y-day").html(show_date_time(web_time));
+</script>
+</body>
+
+</html>

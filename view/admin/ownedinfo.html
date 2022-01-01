@@ -1,0 +1,215 @@
+<?php
+  require __DIR__.'/head.html';
+  require __DIR__.'/header.html';
+  $File_Ming = 'ownedinfo';
+  require __DIR__.'/nav.html';
+  ?>
+<!-- 主体 -->
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb side">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item">会员列表</li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tile">
+                <div class="tile-body">
+
+
+                    <div id="sampleTable_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                        <div class="row">
+
+                            <div class="col-sm-12 col-md-12">
+                                <form report-submit="false">
+                                    <div id="sampleTable_filter" class="dataTables_filter"><label>搜索:<input name="wd"
+                                                type="search" value="<?php echo $wd;?>"
+                                                class="form-control form-control-sm" placeholder=""
+                                                aria-controls="sampleTable"></label></div>
+                                </form>
+
+
+                            </div>
+                        </div>
+
+                        <div class="row row-table-scroll">
+                            <div class="col-sm-12">
+
+                                <table class="table table-hover table-bordered" id="">
+                                    <thead class="table-space">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>用户ID</th>
+                                            <th>接口ID</th>
+                                            <th>接口密匙</th>
+                                            <th>开始时间</th>
+                                            <th>结束时间</th>
+                                            <th>注册时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-space">
+
+                                        <?php if(!empty($data)):
+                            foreach($data as $k=>$v):?>
+                                        <tr role="row" class="odd">
+                                            <td class="sorting_1">
+                                                <?php echo $v['ow_id'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo $v['ow_u_id'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo $v['ow_l_id'];?>
+                                            </td>
+                                            <td>
+                                                <?php echo ($v['ow_md5']);?>
+                                            </td>
+                                            <td>
+                                                <?php echo date('Y-m-d H:i:s',$v['ow_start_time']);?>
+                                            </td>
+                                            <td>
+                                                <?php echo date('Y-m-d H:i:s',$v['ow_end_time']);?>
+                                            </td>
+                                            <td>
+                                                <?php echo($v['ow_found_time']);?>
+                                            </td>
+                                            <td class="api-list-cz">
+                                                <a class="btn btn-primary btn-sm" onclick="editRow(this)"
+                                                    title="<?php echo $v['ow_id'];?>">编辑</a>
+                                                <a class="btn btn-primary btn-sm" onclick="delRow(this)"
+                                                    title="<?php echo $v['ow_id'];?>">删除</a>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach;
+                            endif;?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="sampleTable_info" role="status" aria-live="polite">列表数据
+                                    <?php echo $paging; ?> 条 当前显示 1 到 100 条
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="sampleTable_paginate">
+                                    <ul class="pagination">
+                                        <?php if($page>1) :?>
+                                        <li class="paginate_button page-item previous disabled</li>"
+                                            id="sampleTable_previous">
+                                            <a href="?page=<?php echo $page-1;?>" aria-controls="sampleTable"
+                                                data-dt-idx="0" tabindex="0" class="page-link">上一页</a>
+                                        </li>
+                                        <?php endif;?>
+                                        <li class="paginate_button page-item active"><a aria-controls="sampleTable"
+                                                data-dt-idx="1" tabindex="0" class="page-link">
+                                                <?php echo $page;?>
+                                            </a>
+                                        </li>
+                                        <?php if($paging/10>1):?>
+                                        <li class="paginate_button page-item next" id="sampleTable_next">
+                                            <a href="?page=<?php echo $page+1;?>" aria-controls="sampleTable"
+                                                data-dt-idx="3" tabindex="0" class="page-link">下一页</a>
+                                        </li>
+                                        <?php endif;?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php  require __DIR__.'/fooer.html'; ?>
+    <script type="text/javascript">
+        function editRow(_this) {
+            layer.open({
+                type: 2,
+                title: '接口编辑',
+                shadeClose: false,
+                shade: true,
+                maxmin: false, //开启最大化最小化按钮
+                area: ['80%', '80%'],
+                content: ['./ownededit/?id=' + _this.title]
+            });
+        }
+
+        //删除
+        function delRow(_this) {
+            var td = _this.parentNode;
+            var tr = td.parentNode;
+            var tbody = tr.parentNode;
+            //询问框
+            layer.confirm('确定删除接口？', {
+                title: "提示",
+                btn: ['删除', '取消 '] //按钮
+            }, function () {
+                fd = new FormData();
+                fd.append("id", _this.title);
+                $.ajax({
+                    url: './deluser',
+                    type: "POST",
+                    timeout: "3000",
+                    dataType: "json",
+                    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.code == "200") {
+                            layer.msg(data.msg);
+                            tbody.removeChild(tr);
+                        } else {
+                            layer.msg(data.msg);
+                        }
+                    },
+                    error: function (XMLResponse) {
+                        layer.msg(XMLResponse.error);
+                    }
+                });
+            });
+        }
+
+
+        //登录用户账号
+        function loginuser(_this) {
+            var td = _this.parentNode;
+            var tr = td.parentNode;
+            var tbody = tr.parentNode;
+            
+                fd = new FormData();
+                fd.append("username", _this.title);
+                $.ajax({
+                    url: './loginuser',
+                    type: "POST",
+                    timeout: "3000",
+                    dataType: "json",
+                    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if (data.code == "200") {
+                            layer.msg(data.msg, {
+                                time: 1000
+                            }, function () {
+                                window.open("/user", "_blank");
+                            });
+                        } else {
+                            layer.msg(data.msg);
+                        }
+                    },
+                    error: function (XMLResponse) {
+                        layer.msg(XMLResponse.error);
+                    }
+                });
+        }
+    </script>
+    </body>
+
+    </html>

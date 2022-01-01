@@ -1,0 +1,94 @@
+<?php require __DIR__.'/head.html'; ?>
+
+    <body class="pear-container">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                如果看不到购买按钮请往左划
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="user-table" lay-filter="user-table"></table>
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="2">
+                        <col width="200">
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                                <th>#</th>
+                                <th>接口名称</th>
+                                <th>说明</th>
+                                <th>价格</th>
+                                <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <?php if(!empty($data)):
+                            foreach($data as $k=>$v):?>
+                            <tr>
+                                <td><?php echo $k+1;?></td>
+                                <td><?php echo $v['l_title'];?></td>
+                                <td><?php echo $v['l_desc'];?></td>
+                                <td style="color: crimson;">￥<?php echo $v['p_month'];?></td>
+                                <td>
+                                    <a title="<?php echo $v['l_id'];?>" href="javascript:"
+                                        onclick="purchase(this)">购买</a>
+                                    <a href="/doc/<?php echo $v['l_alias'];?>.html" target="_blank">查看</a>
+                                </td>
+                            </tr>
+                            <?php endforeach;
+                            endif;?>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="/component/layui/layui.js"></script>
+        <script src="/component/pear/pear.js"></script>
+        <script src="/assets/other/js/clipboard.min.js"></script>
+        <script>
+            var screen_width = 0;
+        var screen_height = 0;
+        //监听屏幕宽度
+        window.addEventListener('load', function () {
+            //  console.log("aaa", window.innerWidth);
+            screen_width = getScreenWidth(window.innerWidth);
+            window.addEventListener('resize', function () {
+                //  console.log(window.innerWidth);
+                screen_width = getScreenWidth(window.innerWidth);
+            })
+        });
+
+        //计算窗口宽度
+        function getScreenWidth(width) {
+            var res = 0;
+            if (width > 400) {
+                res = "30%";
+                screen_height = "320px";
+            } else {
+                res = "92%";
+                screen_height = "320px"
+            }
+            return res;
+        }
+
+        //购买窗口
+        function purchase(_this) {
+            // console.log(_this.title);
+            layer.open({
+                type: 2,
+                title: '购买接口',
+                shadeClose: false,
+                shade: true,
+                maxmin: false, //开启最大化最小化按钮
+                area: [screen_width, screen_height],
+                content: '/user/order/' + _this.title
+            });
+        }
+        </script>
+
+<?php require __DIR__.'/footer.html'; ?>

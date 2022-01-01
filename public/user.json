@@ -1,0 +1,127 @@
+{
+    "logo": {
+        "title": "熊猫科技网",
+        "image": "/favicon.ico"
+    },
+    "menu": {
+        "data": [{
+                "id": 1,
+                "title": "基本信息",
+                "icon": "layui-icon layui-icon-home",
+                "type": 1,
+                "openType": "_iframe",
+                "href": "/user/console.html"
+            },
+            {
+                "id": 2,
+                "title": "我的接口",
+                "icon": "fa fa-shopping-cart",
+                "type": 1,
+                "openType": "_iframe",
+                "href": "/user/owned.html"
+            },
+            {
+                "id": 3,
+                "title": "产品列表",
+                "icon": "fa fa-list-alt",
+                "type": 1,
+                "openType": "_iframe",
+                "href": "/user/goods.html"
+            },
+            {
+                "id": 4,
+                "title": "消费记录",
+                "icon": "fa fa-edit",
+                "type": 0,
+                "href": "",
+                "children": [{
+                    "id": 10,
+                    "title": "购买记录",
+                    "icon": "layui-icon layui-icon-console",
+                    "type": 1,
+                    "openType": "_iframe",
+                    "href": "/user/buyapi.html"
+                }, {
+                    "id": 11,
+                    "title": "充值记录",
+                    "icon": "layui-icon layui-icon-console",
+                    "type": 1,
+                    "openType": "_iframe",
+                    "href": "/user/buypay.html"
+                }]
+            },
+            {
+                "id": 5,
+                "title": "自助充值",
+                "icon": "layui-icon layui-icon-console",
+                "type": 1,
+                "openType": "_iframe",
+                "href": "/user/pay.html"
+            },
+            {
+                "id": 6,
+                "title": "修改密码",
+                "icon": "icon pear-icon pear-icon-edit",
+                "type": 1,
+                "openType": "_iframe",
+                "href": "/user/passwd.html"
+            }
+        ],
+        "accordion": true,
+        "control": false,
+        "select": "0",
+        "async": false
+    },
+    "tab": {
+        "enable": true,
+        "muiltTab": true,
+        "keepState": true,
+        "tabMax": 10,
+        "index": {
+            "id": "0",
+            "href": "/user/console.html",
+            "title": "首页"
+        }
+    },
+    "theme": {
+        "defaultColor": "2",
+        "defaultMenu": "dark-theme",
+        "allowCustom": true
+    },
+    "colors": [{
+        "id": "1",
+        "color": "#2d8cf0"
+    }, {
+        "id": "2",
+        "color": "#5FB878"
+    }, {
+        "id": "3",
+        "color": "#1E9FFF"
+    }, {
+        "id": "4",
+        "color": "#FFB800"
+    }, {
+        "id": "5",
+        "color": "darkgray"
+    }],
+    "links": [{
+        "icon": "layui-icon layui-icon-auz",
+        "title": "电报交流群",
+        "href": "https://t.me/pandasgk"
+    }, {
+        "icon": "layui-icon layui-icon-auz",
+        "title": "联系一号客服",
+        "href": "https://t.me/luoribot"
+    }, {
+        "icon": "layui-icon layui-icon-auz",
+        "title": "联系二号客服",
+        "href": "https://t.me/pandakfbot"
+    }],
+    "other": {
+        "keepLoad": 1200,
+        "autoHead": false
+    },
+    "header": {
+        "message": "admin/data/message.json"
+    }
+}

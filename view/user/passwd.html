@@ -1,0 +1,71 @@
+<?php require __DIR__.'/head.html'; ?>
+
+<body class="pear-container">
+    <div class="layui-card">
+        <div class="layui-card-header">修改密码</div>
+        <div class="layui-card-body">
+            <form class="layui-form" action="javascript:void(0);" id="user-passwd">
+                <div class="tile-body">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">旧密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" required autocomplete="off" class="layui-input" lay-verify="required" name="old_passwd" placeholder="请输入旧密码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">新密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" required autocomplete="off" class="layui-input" lay-verify="required" name="new_passwd" placeholder="请输入新密码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">确定新密码</label>
+                        <div class="layui-input-block">
+                            <input type="password" required autocomplete="off" class="layui-input" lay-verify="required" name="news_passwd" placeholder="请再次输入新密码">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="button" class="pear-btn pear-btn-primary" name="submit" onclick="pwd()"><i class="icon pear-icon pear-icon-save"></i>修改</button>
+                        <span style="color:#e60c0c">&nbsp;&nbsp; 请牢记您的新密码！</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+		<script src="/assets/layui/layui.all.js"></script>
+		<script src="/component/pear/pear.js"></script>
+		<script src="/assets/other/js/jquery.min.js"></script>
+    <script>
+        function pwd(){
+                fd = new FormData(document.getElementById('user-passwd'));
+                $.ajax({
+                    url: '/user/passwd',
+                    type: "POST",
+                    timeout: "5000",
+                    dataType: "json",
+                    contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function(data) {
+                        if (data.code == "200") {
+                            layer.msg(data.msg, {
+                                time: 1500
+                            }, function() {
+                                window.location.href = '/user/logout';
+                            });
+                        } else {
+                            layer.msg(data.msg);
+                        }
+                    },
+                    error: function(XMLResponse) {
+                        layer.msg(XMLResponse.error);
+                    }
+                });
+                return false;
+            };
+    </script>
+
+    <?php  require __DIR__.'/footer.html'; ?>

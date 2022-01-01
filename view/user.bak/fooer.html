@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="tile" style="margin-bottom: 0px;">
+            <div class="tile-body"> 2020 - 2021 食铁兽科技 All Rights Reserved</div>
+        </div>
+    </div>
+</div>
+</main>
+<script>
+  (function(d, w, c) {
+    var s = d.createElement('script');
+    w[c] = w[c] || function() {
+      (w[c].z = w[c].z || []).push(arguments);
+    };
+    s.async = true;
+    s.src = 'https://static.ahc.ink/hecong.js';
+    if (d.head) d.head.appendChild(s);
+  })(document, window, '_AIHECONG');
+  _AIHECONG('ini',{ channelId : '3Jho1R' });
+  _AIHECONG('customer',{
+        '账号' : '<?php echo $_SESSION['userinfo']['u_name'];?>',         
+        '邮箱' : '<?php echo $_SESSION['userinfo']['u_email'];?>',     
+        '余额' : '<?php echo $_SESSION['userinfo']['u_balance'];?>',       
+        '注册时间' : '<?php echo $_SESSION['userinfo']['u_found_time'];?>'
+      })
+</script>
+<!-- Essential javascripts for application to work-->
+<script src="/assets/awesome/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/awesome/js/popper.min.js"></script>
+<script src="/assets/awesome/js/bootstrap.min.js"></script>
+<script src="/assets/awesome/js/main.js"></script>
+<!-- The javascript plugin to display page loading on top-->
+<script src="/assets/awesome/js/plugins/pace.min.js"></script>
+<!-- Page specific javascripts-->
+<script src="/assets/awesome/js/plugins/chart.js"></script>
+<!-- Data table plugin-->
+<!--<script type="text/javascript" src="/assets/awesome/js/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/assets/awesome/js/plugins/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+    $('#sampleTable').DataTable();
+</script>-->
+<script src="/assets/layui/layui.all.js"></script>
+<!-- <script src="/assets/layui/layui.js"></script> -->

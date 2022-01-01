@@ -1,0 +1,83 @@
+<?php
+  require __DIR__.'/head.html';
+  require __DIR__.'/header.html';
+  $File_Ming = 'newkm';
+  require __DIR__.'/nav.html';
+  ?>
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="">添加卡密</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form id="admin-addkami">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="form-group">
+                            <label class="control-label">卡密余额</label>
+                            <input class="form-control" type="text" name="money" value="" placeholder="10（单位：元）">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">卡密数量</label>
+                            <input class="form-control" type="text" name="count" value="" placeholder="5（单位：个）">
+                        </div>
+                    </div>
+                    <div class="tile-footer">
+                        <button class="btn btn-primary" type="button"><i
+                                class="fa fa-fw fa-lg fa-check-circle"></i>添加</button>
+                        <span style="color:#e60c0c"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <?php  require __DIR__.'/fooer.html'; ?>
+
+    <script>
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#test-carousel-normal',
+                width: '100%' //设置容器宽度
+                    ,
+                height: '238px' //设置容器宽度
+                    ,
+                arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+
+        $('#admin-addkami button').click(function () {
+            fd = new FormData(document.getElementById('admin-addkami'));
+            $.ajax({
+                url: './addkami',
+                type: "POST",
+                timeout: "5000",
+                dataType: "json",
+                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.code == "200") {
+                        layer.open({
+                            type: 1,
+                            area: ['50%', '100%'], //宽高
+                            content: data.msg
+                        });
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function (XMLResponse) {
+                    layer.msg(XMLResponse.error);
+                }
+            });
+        });
+    </script>

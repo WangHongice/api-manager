@@ -1,0 +1,56 @@
+<?php
+  require __DIR__.'/head.html';
+  ?>
+
+    <body class="pear-container">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                如果对订单有疑问请联系右下角在线客服！
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="user-table" lay-filter="user-table"></table>
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="2">
+                        <col width="200">
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                                <th>ID</th>
+                                <th>接口名称</th>
+                                <th>订单号</th>
+                                <th>价格</th>
+                                <th>消费类型</th>
+                                <th>购买时间</th>
+                                <th>到期时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <?php if(!empty($data)):
+                            foreach($data as $k=>$v):?>
+                            <tr>
+                                <td><?php echo $k+1;?></td>
+                                <td><?php echo $v['o_title'];?></td>
+                                <td><?php echo $v['o_pay_no'];?></td>
+                                <td><?php echo $v['o_price'];?>元</td>
+                                <td><?php if($v['o_type']==1){echo '新购';}else{ echo "续费";}?></td>
+                                <td><?php echo $v['o_time'];?></td>
+                                <td><?php echo date("Y-m-d H:i:s",$v['o_expire']);?></td>
+                            </tr>
+                            <?php endforeach;
+                            endif;?>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="/component/layui/layui.js"></script>
+        <script src="/component/pear/pear.js"></script>
+        <script src="/assets/other/js/clipboard.min.js"></script>
+        
+        <?php  require __DIR__.'/footer.html'; ?>

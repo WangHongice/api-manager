@@ -1,0 +1,84 @@
+<?php
+  require __DIR__.'/head.html';
+  require __DIR__.'/header.html';
+  $File_Ming = 'setuser';
+  require __DIR__.'/nav.html';
+  ?>
+<main class="app-content">
+    <div class="app-title">
+        <ul class="app-breadcrumb breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+            <li class="breadcrumb-item"><a href="">注册设置</a></li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form id="admin-setuser">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="form-group">
+                            <label for="details">注册验证</label>
+                            <div class="toggle-flip">
+                                <label>
+                                    <input type="checkbox"
+                                        <?php if(isset($web['verify']) && !empty($web['verify'])){echo 'checked="checked"';}?>
+                                        value="1" name="verify">
+                                    <span class="flip-indecator" data-toggle-on="ON" data-toggle-off="OFF"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tile-footer">
+                        <button class="btn btn-primary" type="button"><i
+                                class="fa fa-fw fa-lg fa-check-circle"></i>保存</button>
+                        <span style="color:#e60c0c"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <?php  require __DIR__.'/fooer.html'; ?>
+
+    <script>
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#test-carousel-normal',
+                width: '100%' //设置容器宽度
+                    ,
+                height: '238px' //设置容器宽度
+                    ,
+                arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+
+        $('#admin-setuser button').click(function () {
+            fd = new FormData(document.getElementById('admin-setuser'));
+            $.ajax({
+                url: './setuser',
+                type: "POST",
+                timeout: "5000",
+                dataType: "json",
+                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.code == "200") {
+                        layer.msg(data.msg, {
+                            time: 1500
+                        }, function () {});
+                    } else {
+                        layer.msg(data.msg);
+                    }
+                },
+                error: function (XMLResponse) {
+                    layer.msg(XMLResponse.error);
+                }
+            });
+        });
+    </script>

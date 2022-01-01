@@ -1,0 +1,142 @@
+<?php require __DIR__.'/head.html'; ?>
+		<script src="/assets/other/js/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/assets/other/css/userPay.css">
+<style>
+    a:link {
+        text-decoration: none;
+    }
+    
+    a:active {
+        text-decoration: blink
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
+    
+    a:visited {
+        text-decoration: none;
+    }
+    
+    *,
+     :after,
+     :before {
+        /* -webkit-box-sizing: border-box; */
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    
+    .layui-text ul {
+        padding: 0;
+    }
+    
+    .form-control {
+        height: 37px;
+    }
+    
+    button,
+    html input[type=button],
+    input[type=reset],
+    input[type=submit] {
+        -webkit-appearance: button;
+        cursor: pointer;
+    }
+</style>
+
+<body class="pear-container">
+    <div class="col-md-12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                请输入充值卡密进行余额充值<br>有问题联系右下角在线客服！
+            </div>
+        </div>
+        <div class="layui-card ptch-overflow-y">
+            <div class="layui-card-header">
+                卡密充值余额
+            </div>
+            <div class="layui-card-body layui-text layadmin-text">
+                <section class="clearfix g-member">
+                    <form id="user-pay">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: auto;">当前余额：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" autocomplete="off" class="layui-input" value="<?php echo $_SESSION['userinfo']['u_balance'];?>元">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label" style="width: auto;">充值卡密：</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="kami" id="price" required lay-verify="required" placeholder="请输入充值卡密" autocomplete="off" class="layui-input" style="color: red;">
+                            </div>
+                        </div>
+                        <!--值0表示卡密充值-->
+                        <input type="hidden" value="4" name="salt">
+                        <input type="hidden" name="user" value="<?php echo $_SESSION['userinfo']['u_name'];?>">
+                        <input type="hidden" name="param" value="自助充值">
+                        <div class="mt10 f-Recharge-btn">
+                            <blockquote class="layui-elem-quote" style="margin-top: 5px;border-left: 5px solid#77bd94;">
+                                <p style="padding: 0;margin: 0;">充值说明:</p>
+                                <span style="color:#e60c0c">
+                                        1.充值金额仅用于平台消费, 不支持提现
+                                        <br>
+                                        2.充值不到账请联系网站管理员核实
+                                        <br>
+                                        3.如点击充值后未跳转充值页面, 请刷新本页面重新操作即可
+                                        <br>
+                                    </span>
+                            </blockquote><br>
+                            <div class="layui-row">
+                                <div class="layui-col-xs6 layui-col-sm5 layui-col-md5 layui-col-lg4">
+                                    <button id="btnSubmit" type="button" class="pear-btn pear-btn-primary" style="max-width:200px">确认充值</button>
+                                </div>
+                                <div class="layui-col-xs6 layui-col-sm5 layui-col-md5 layui-col-lg4">
+                                    <a class="layui-btn layui-btn-danger" href="https://www.mnbfk.com/links/E61118D4" target="_blank">》点我购买卡密《</a>
+                                </div>
+                            </div><br>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#user-pay button').click(function() {
+            fd = new FormData(document.getElementById('user-pay'));
+            var loading = layer.load(2, {
+                shade: 0.5,
+                time: 10000
+            });
+            $.ajax({
+                url: '/user/recharge',
+                type: "POST",
+                timeout: "10000",
+                dataType: "json",
+                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+                    layer.close(loading);
+                    if (data.code == "200") {
+                        layer.msg(data.msg, {
+                            time: 3000
+                        }, function() {
+                            location.reload();
+                        });
+                    } else {
+                        layer.alert(data.msg, {
+                            title: "错误 如有疑问请联系客服",
+                            icon: 5,
+                            time: 10000
+                        })
+                    }
+                },
+                error: function(XMLResponse) {
+                    layer.close(loading);
+                    layer.msg(XMLResponse.error);
+                }
+            });
+        });
+    </script>
+    <?php  require __DIR__.'/footer.html'; ?>
