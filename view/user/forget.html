@@ -1,124 +1,129 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>找回密码</title>
-		<!-- 样 式 文 件 -->
-		<link rel="stylesheet" href="/component/pear/css/pear.css" />
-		<link rel="stylesheet" href="/admin/css/other/login.css" />
-	</head>
-    <!-- 代 码 结 构 -->
-	<body background="/admin/images/background.svg" style="background-size: cover;">
-		<form class="layui-form" action="javascript:void(0);" id="user-forget">
-			<div class="layui-form-item">
-			    <img class="logo" src="/favicon.ico">
-				<div class="title">找 回 密 码</div>
-				<div class="desc">
-					熊猫科技 - 提供优质接口调用平台
-				</div>
-			</div>
-			<div class="layui-form-item">
-				<input placeholder="您之前注册的账号" lay-verify="required" hover class="layui-input" name="username" value="" />
-			</div>
-			<div class="layui-form-item">
-				<input placeholder="请输入绑定的邮箱号码" lay-verify="required" hover class="layui-input" name="email" />
-			</div>
-			<div class="layui-form-item">
-				<input placeholder="输入右侧验证码"  hover id="valcode" lay-verify="required" class="code layui-input layui-input-inline" type="text" name="code" />
-				<img src="/code/login" id="code" onclick="javascript:this.src='/code/login?'+Math.random()" title="看不清？点击更换" class="codeImage" style="cursor:pointer;width: 120px;"/>
-			</div>
-			<div class="layui-form-item">
-				<button type="button" class="pear-btn pear-btn-success login" lay-submit lay-filter="login">
+
+<head>
+    <meta charset="utf-8">
+    <title>找回密码</title>
+    <!-- 样 式 文 件 -->
+    <link rel="stylesheet" href="/component/pear/css/pear.css" />
+    <link rel="stylesheet" href="/admin/css/other/login.css" />
+</head>
+<!-- 代 码 结 构 -->
+
+<body background="/admin/images/background.svg" style="background-size: cover;">
+    <form class="layui-form" action="javascript:void(0);" id="user-forget">
+        <div class="layui-form-item">
+            <img class="logo" src="/favicon.ico">
+            <div class="title">找 回 密 码</div>
+            <div class="desc">
+                <?php echo $web["title"];?> - 提供优质接口调用平台
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <input placeholder="您之前注册的账号" lay-verify="required" hover class="layui-input" name="username" value="" />
+        </div>
+        <div class="layui-form-item">
+            <input placeholder="请输入绑定的邮箱号码" lay-verify="required" hover class="layui-input" name="email" />
+        </div>
+        <div class="layui-form-item">
+            <input placeholder="输入右侧验证码" hover id="valcode" lay-verify="required" class="code layui-input layui-input-inline" type="text" name="code" />
+            <img src="/code/login" id="code" onclick="javascript:this.src='/code/login?'+Math.random()" title="看不清？点击更换" class="codeImage" style="cursor:pointer;width: 120px;" />
+        </div>
+        <div class="layui-form-item">
+            <button type="button" class="pear-btn pear-btn-success login" lay-submit lay-filter="login">
 					登 入
 				</button>
-			</div>
-		</form>
-		<div style="text-align: center;margin: 0 top;">
-		    <div class="layui-col-xs12">
-				<div class="layui-card">
-					<div class="layui-card-body">
-						<div class="pear-btn-group">
-							<button class="pear-btn pear-btn-primary" round> <a href="/user/login.html">返回登录</a></button>
-							<button class="pear-btn pear-btn-primary" round> <a href="/user/register.html">点我注册账号</a></button>
-						</div>
-						<button class="layui-btn layui-btn-primary layui-btn-radius"><a href="#" onclick="layer.alert('以QQ邮箱为例，其他邮箱可能不会拦截。<br>手机请打开QQ，在任意一个人的聊天发mail.qq.com，点开链接，翻到下面，使用网页版。查看你的收件箱，如果没有，请点开文件夹，查看垃圾箱。<br>电脑请在浏览器登录QQ邮箱后在左面的列表点开收件箱，或者垃圾箱。<br>如果提示网站存在不良信息，请在浏览器打开验证链接！<br><b>最后还请帮我们点一下“这不是垃圾邮件”</b>')">提示账号未验证并且没收到验证邮件？</a></button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 资 源 引 入 -->
-		<script src="/assets/layui/layui.all.js"></script>
-		<script src="/component/pear/pear.js"></script>
-		<script src="/assets/other/js/jquery.min.js"></script>
-		<script>
-			layui.use(['form', 'button', 'popup'], function() {
-				var form = layui.form;
-				var button = layui.button;
-				var popup = layui.popup;
-				
-                // 登 录 提 交
-				form.on('submit(login)', function(data) {
-				    console.log(data);
-					
-					/// 动画
-					var loading = button.load({
-						elem: '.login'
-					})
-				    layer.confirm("点击确定后我们将为您的账号重设一个密码，您可以使用新密码登录后重新为您的账号自定义一个密码。确定继续吗？", {
-        btn: ['确定','取消'] //按钮
-      }, function () {
-					/// 动画
-					var loading = button.load({
-						elem: '.login'
-					});
-        /*实例化表单数据*/
-        var fd = new FormData(document.getElementById('user-forget'));
-        $.ajax({
-          url: '/user/forget',
-          type: "POST",
-          timeout: "10000",
-          dataType: "json",
-          contentType: 'application/x-www-form-urlencoded;charset=utf-8',
-          data: fd,
-          contentType: false,
-          processData: false,
-          success: function (data) {
-              loading.stop();
-            if (data.code == "200") {
-              layer.msg(data.msg, { time: 1000 });
-              //询问框
-              layer.confirm(data.msg, {
-                btn: ['确定'] //按钮
-              }, function () {
-                window.location.href = "/user/login.html";
-              });
-            } else {
-                loading.stop();
-              layer.msg(data.msg);
-              document.getElementById('code').src = '/code/forget?' + Math.random();
-              document.getElementById('valcode').value = "";
+        </div>
+    </form>
+    <div style="text-align: center;margin: 0 top;">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="pear-btn-group">
+                        <button class="pear-btn pear-btn-primary" round> <a href="/user/login.html">返回登录</a></button>
+                        <button class="pear-btn pear-btn-primary" round> <a href="/user/register.html">点我注册账号</a></button>
+                    </div>
+                    <button class="layui-btn layui-btn-primary layui-btn-radius"><a href="#" onclick="layer.alert('以QQ邮箱为例，其他邮箱可能不会拦截。<br>手机请打开QQ，在任意一个人的聊天发mail.qq.com，点开链接，翻到下面，使用网页版。查看你的收件箱，如果没有，请点开文件夹，查看垃圾箱。<br>电脑请在浏览器登录QQ邮箱后在左面的列表点开收件箱，或者垃圾箱。<br>如果提示网站存在不良信息，请在浏览器打开验证链接！<br><b>最后还请帮我们点一下“这不是垃圾邮件”</b>')">提示账号未验证并且没收到验证邮件？</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 资 源 引 入 -->
+    <script src="/assets/layui/layui.all.js"></script>
+    <script src="/component/pear/pear.js"></script>
+    <script src="/assets/other/js/jquery.min.js"></script>
+    <script>
+        layui.use(['form', 'button', 'popup'], function() {
+            var form = layui.form;
+            var button = layui.button;
+            var popup = layui.popup;
+
+            // 登 录 提 交
+            form.on('submit(login)', function(data) {
+                console.log(data);
+
+                /// 动画
+                var loading = button.load({
+                    elem: '.login'
+                })
+                layer.confirm("点击确定后我们将为您的账号重设一个密码，您可以使用新密码登录后重新为您的账号自定义一个密码。确定继续吗？", {
+                    btn: ['确定', '取消'] //按钮
+                }, function() {
+                    /// 动画
+                    var loading = button.load({
+                        elem: '.login'
+                    });
+                    /*实例化表单数据*/
+                    var fd = new FormData(document.getElementById('user-forget'));
+                    $.ajax({
+                        url: '/user/forget',
+                        type: "POST",
+                        timeout: "10000",
+                        dataType: "json",
+                        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                        data: fd,
+                        contentType: false,
+                        processData: false,
+                        success: function(data) {
+                            loading.stop();
+                            if (data.code == "200") {
+                                layer.msg(data.msg, {
+                                    time: 1000
+                                });
+                                //询问框
+                                layer.confirm(data.msg, {
+                                    btn: ['确定'] //按钮
+                                }, function() {
+                                    window.location.href = "/user/login.html";
+                                });
+                            } else {
+                                loading.stop();
+                                layer.msg(data.msg);
+                                document.getElementById('code').src = '/code/forget?' + Math.random();
+                                document.getElementById('valcode').value = "";
+                            }
+                        },
+                        error: function(XMLResponse) {
+                            loading.stop();
+                            layer.alert("返回超时。。。或许您的请求已经完成！请查看您的邮箱！");
+                        }
+                    });
+                });
+
+                /// 验证
+
+                /// 登录
+                return false;
+            });
+        })
+
+        //回车提交事件
+        $("body").keydown(function() {
+            if (event.keyCode == "13") { //keyCode=13是回车键
+                $("#layui-form").submit();
             }
-          },
-          error: function (XMLResponse) {
-          loading.stop();
-            layer.alert("返回超时。。。或许您的请求已经完成！请查看您的邮箱！");
-          }
         });
-        });
-					
-					/// 验证
-					
-					/// 登录
-					return false;
-				});
-			})
-			
-    //回车提交事件
-    $("body").keydown(function () {
-      if (event.keyCode == "13") { //keyCode=13是回车键
-        $("#layui-form").submit();
-      }
-    });
-		</script>
-	</body>
+    </script>
+</body>
+
 </html>

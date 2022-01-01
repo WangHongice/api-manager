@@ -2,62 +2,66 @@
 <html lang="zh">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title><?php echo $web['title'];?> - <?php echo $web['name'];?></title>
-	<meta name="description" content="<?php echo $web['description'];?>">
-	<meta name="keywords" content="<?php echo $web['keywords'];?>">
-	<meta name="author" content="食铁兽科技">
-	<meta name="founder" content="食铁兽科技API">
-	<link href="/assets/other/css/site.min.css" rel="stylesheet">
-	<link href="/assets/other/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="/assets/other/css/layui.css">
-	<link href="/assets/other/css/oneui.css" rel="stylesheet">
-	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-	<script src="/assets/other/js/jquery.min.js"></script>
-	<script src="/assets/layui/layui.all.js"></script>
-	<script>
-		var web_time = "<?php echo $web['time'];?>"; //网站创建时间
-	</script>
-	  <!--百度提交-->
-  <script>
-    (function() {
-      var bp = document.createElement('script');
-      var curProtocol = window.location.protocol.split(':')[0];
-      if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-      } else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-      }
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(bp, s);
-    })();
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <?php echo $web['title'];?> -
+        <?php echo $web['name'];?>
+    </title>
+    <meta name="description" content="<?php echo $web['description'];?>">
+    <meta name="keywords" content="<?php echo $web['keywords'];?>">
+    <meta name="author" content="食铁兽科技">
+    <meta name="founder" content="食铁兽科技API">
+    <link href="/assets/other/css/site.min.css" rel="stylesheet">
+    <link href="/assets/other/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/other/css/layui.css">
+    <link href="/assets/other/css/oneui.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <script src="/assets/other/js/jquery.min.js"></script>
+    <script src="/assets/layui/layui.all.js"></script>
+    <script>
+        var web_time = "<?php echo $web['time'];?>"; //网站创建时间
+    </script>
+    <!--百度提交-->
+    <script>
+        (function() {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            } else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
 </head>
 
 <body>
-	<header class="site-header">
-		<nav class="nav_jsxs">
-			<span style="float: left;"><a class="logo_jsxs" href=""></a></span>
-			<a href="../">首页</a>
-			<?php if(isset($_SESSION['userinfo']['u_name'])):?>
-			<a href="/user/index.html">个人中心</a>
-			<?php else:?>
-			<a style="font-size: 1rem;" href="/user/login.html">登录</a>
-			<?php endif;?>
-		</nav>
-		<div class="box-text">
-			<h1>食铁兽科技会员API</h1>
-			<p>稳定、快速、丰富的 API 接口服务<br>
-				<?php if(isset($list)):?>
-				<span class="package-amount">共收录了
+    <header class="site-header">
+        <nav class="nav_jsxs">
+            <span style="float: left;"><a class="logo_jsxs" href=""></a></span>
+            <a href="../">首页</a>
+            <?php if(isset($_SESSION['userinfo']['u_name'])):?>
+            <a href="/user/index.html">个人中心</a>
+            <?php else:?>
+            <a style="font-size: 1rem;" href="/user/login.html">登录</a>
+            <?php endif;?>
+        </nav>
+        <div class="box-text">
+            <h1>
+                <?php echo $web['title'];?>
+            </h1>
+            <p>稳定、快速、丰富的 API 接口服务<br>
+                <?php if(isset($list)):?>
+                <span class="package-amount">共收录了
 					<strong><?php echo count($list);?> </strong>个接口 · 今日调用 <?php echo $dayCount['count'];?> 次
 				</span>
-				<?php endif;?>
-			</p>
-			<!-- 搜索框
+                <?php endif;?>
+            </p>
+            <!-- 搜索框
 			<div class="search-wraper" role="search">
 				<div class="form-group">
 					<input class="form-control search clearable" placeholder="搜索API如：16亿" autocomplete="off" autofocus=""
@@ -65,6 +69,6 @@
 						id="api-search" />
 				</div>
 			</div> -->
-		</div>
+        </div>
 
-	</header>
+    </header>

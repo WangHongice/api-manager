@@ -109,149 +109,149 @@ Route::post("/user/recharge", "User/HandleController@kami");
 #后台################################################
 
 //后台登录页
-Route::get("/zeyuadminnbvip666520lbwnb/login.html", "Admin/IndexController@login");
+Route::get("/admin/login.html", "Admin/IndexController@login");
 
 //后台首页
-Route::get("/zeyuadminnbvip666520lbwnb", "Admin/IndexController@index");
-Route::get('/zeyuadminnbvip666520lbwnb' . '/', "Admin/IndexController@index");
-Route::get("/zeyuadminnbvip666520lbwnb/index.html", "Admin/IndexController@index");
+Route::get("/admin", "Admin/IndexController@index");
+Route::get('/admin' . '/', "Admin/IndexController@index");
+Route::get("/admin/index.html", "Admin/IndexController@index");
 
 //后台接口添加页
-Route::get("/zeyuadminnbvip666520lbwnb/addapi.html", "Admin/IndexController@addapi");
+Route::get("/admin/addapi.html", "Admin/IndexController@addapi");
 
 //后台接口添加页
-Route::get("/zeyuadminnbvip666520lbwnb/newkm.html", "Admin/IndexController@newkm");
+Route::get("/admin/newkm.html", "Admin/IndexController@newkm");
 
 //后台参数设置页
-Route::get("/zeyuadminnbvip666520lbwnb/apiinfo.html", "Admin/IndexController@apiinfo");
+Route::get("/admin/apiinfo.html", "Admin/IndexController@apiinfo");
 
 //后台数据绑定页
-Route::get("/zeyuadminnbvip666520lbwnb/datainfo.html", "Admin/IndexController@datainfo");
+Route::get("/admin/datainfo.html", "Admin/IndexController@datainfo");
 
 //后台文件绑定页
-Route::get("/zeyuadminnbvip666520lbwnb/fileinfo.html", "Admin/IndexController@fileinfo");
+Route::get("/admin/fileinfo.html", "Admin/IndexController@fileinfo");
 
 //后台接口编辑页
-Route::get("/zeyuadminnbvip666520lbwnb/editapi/{id}", "Admin/IndexController@editapi");
+Route::get("/admin/editapi/{id}", "Admin/IndexController@editapi");
 
 //后台接口列表页
-Route::get("/zeyuadminnbvip666520lbwnb/apilist.html", "Admin/IndexController@apilist");
+Route::get("/admin/apilist.html", "Admin/IndexController@apilist");
 
 //后台网站设置页
-Route::get("/zeyuadminnbvip666520lbwnb/webset.html", "Admin/IndexController@webset");
+Route::get("/admin/webset.html", "Admin/IndexController@webset");
 
 //后台会员列表页
-Route::get("/zeyuadminnbvip666520lbwnb/userinfo.html", "Admin/IndexController@userinfo");
+Route::get("/admin/userinfo.html", "Admin/IndexController@userinfo");
 
 //后台支付设置页
-Route::get("/zeyuadminnbvip666520lbwnb/payset.html", "Admin/IndexController@payset");
+Route::get("/admin/payset.html", "Admin/IndexController@payset");
 
 //后台退出登录
-Route::get("/zeyuadminnbvip666520lbwnb/logout", "Admin/IndexController@logout");
+Route::get("/admin/logout", "Admin/IndexController@logout");
 
 //后台密码修改
-Route::get("/zeyuadminnbvip666520lbwnb/passwd.html", "Admin/IndexController@passwd");
+Route::get("/admin/passwd.html", "Admin/IndexController@passwd");
 
 //后台用户编辑
-Route::get("/zeyuadminnbvip666520lbwnb/useredit/{id}", "Admin/IndexController@useredit");
+Route::get("/admin/useredit/{id}", "Admin/IndexController@useredit");
 
 //后台会员添加
-Route::get("/zeyuadminnbvip666520lbwnb/adduser.html", "Admin/IndexController@adduser");
+Route::get("/admin/adduser.html", "Admin/IndexController@adduser");
 
 // 注册设置
-Route::get("/zeyuadminnbvip666520lbwnb/setuser.html", "Admin/IndexController@setuser");
+Route::get("/admin/setuser.html", "Admin/IndexController@setuser");
 
 //后台邮箱配置
-Route::get("/zeyuadminnbvip666520lbwnb/email.html", "Admin/IndexController@email");
+Route::get("/admin/email.html", "Admin/IndexController@email");
 
 //redis配置
-Route::get("/zeyuadminnbvip666520lbwnb/redis.html", "Admin/IndexController@redis");
+Route::get("/admin/redis.html", "Admin/IndexController@redis");
 
 // 后台订单页
-Route::get("/zeyuadminnbvip666520lbwnb/order.html", "Admin/IndexController@order");
+Route::get("/admin/order.html", "Admin/IndexController@order");
 
 //添加卡密页
-Route::get("/zeyuadminnbvip666520lbwnb/addkami.html", "Admin/IndexController@addkami");
+Route::get("/admin/addkami.html", "Admin/IndexController@addkami");
 
 // 卡密管理页
-Route::get("/zeyuadminnbvip666520lbwnb/kami.html", "Admin/IndexController@kami");
+Route::get("/admin/kami.html", "Admin/IndexController@kami");
 
 #数据处理##########################################
 
 //登录用户账号
-Route::post("/zeyuadminnbvip666520lbwnb/loginuser", "Admin/HandleController@loginuser");
+Route::post("/admin/loginuser", "Admin/HandleController@loginuser");
 
 // 添加卡密
-Route::post("/zeyuadminnbvip666520lbwnb/addkami", "Admin/HandleController@addkami");
+Route::post("/admin/addkami", "Admin/HandleController@addkami");
 
 //redis保存
-Route::post("/zeyuadminnbvip666520lbwnb/redis", "Admin/HandleController@redis");
+Route::post("/admin/redis", "Admin/HandleController@redis");
 
 //接口价格修改 
-Route::post("/zeyuadminnbvip666520lbwnb/charge", "Admin/HandleController@charge");
+Route::post("/admin/charge", "Admin/HandleController@charge");
 
 //添加用户
-Route::post("/zeyuadminnbvip666520lbwnb/adduser", "Admin/HandleController@adduser");
+Route::post("/admin/adduser", "Admin/HandleController@adduser");
 
 //邮箱配置
-Route::post("/zeyuadminnbvip666520lbwnb/email", "Admin/HandleController@email");
+Route::post("/admin/email", "Admin/HandleController@email");
 
 //修改登录密码
-Route::post("/zeyuadminnbvip666520lbwnb/passwd", "Admin/HandleController@passwd");
+Route::post("/admin/passwd", "Admin/HandleController@passwd");
 
 //会员编辑
-Route::post("/zeyuadminnbvip666520lbwnb/useredit", "Admin/HandleController@useredit");
+Route::post("/admin/useredit", "Admin/HandleController@useredit");
 
 //会员删除
-Route::post("/zeyuadminnbvip666520lbwnb/deluser", "Admin/HandleController@deluser");
+Route::post("/admin/deluser", "Admin/HandleController@deluser");
 
 //登录验证
-Route::post("/zeyuadminnbvip666520lbwnb/login", "Admin/HandleController@login");
+Route::post("/admin/login", "Admin/HandleController@login");
 
 //网站设置保存
-Route::post("/zeyuadminnbvip666520lbwnb/webset", "Admin/HandleController@webset");
+Route::post("/admin/webset", "Admin/HandleController@webset");
 
 // 注册设置
-Route::post("/zeyuadminnbvip666520lbwnb/setuser", "Admin/HandleController@setuser");
+Route::post("/admin/setuser", "Admin/HandleController@setuser");
 
 //支付设置保存
-Route::post("/zeyuadminnbvip666520lbwnb/payset", "Admin/HandleController@payset");
+Route::post("/admin/payset", "Admin/HandleController@payset");
 
 //接口添加
-Route::post("/zeyuadminnbvip666520lbwnb/addapi", "Admin/HandleController@addapi");
+Route::post("/admin/addapi", "Admin/HandleController@addapi");
 
 //获取表字段
-Route::post("/zeyuadminnbvip666520lbwnb/getField", "Admin/HandleController@getField");
+Route::post("/admin/getField", "Admin/HandleController@getField");
 
 //获取接口文件列表
-Route::post("/zeyuadminnbvip666520lbwnb/getApiFile", "Admin/HandleController@getApiFile");
+Route::post("/admin/getApiFile", "Admin/HandleController@getApiFile");
 
 // 获取接口文件内容 getApiFileC
-Route::post("/zeyuadminnbvip666520lbwnb/getApiFileC", "Admin/HandleController@getApiFileC");
+Route::post("/admin/getApiFileC", "Admin/HandleController@getApiFileC");
 
 // 接口文件上传 putApiFile
-Route::post("/zeyuadminnbvip666520lbwnb/putApiFile", "Admin/HandleController@putApiFile");
+Route::post("/admin/putApiFile", "Admin/HandleController@putApiFile");
 
 // 接口文件保存 editFile
-Route::post("/zeyuadminnbvip666520lbwnb/editFile", "Admin/HandleController@editFile");
+Route::post("/admin/editFile", "Admin/HandleController@editFile");
 
 //添加数据绑定
-Route::post("/zeyuadminnbvip666520lbwnb/datainfo", "Admin/HandleController@datainfo");
+Route::post("/admin/datainfo", "Admin/HandleController@datainfo");
 
 //删除接口
-Route::post("/zeyuadminnbvip666520lbwnb/delapi", "Admin/HandleController@delapi");
+Route::post("/admin/delapi", "Admin/HandleController@delapi");
 
 //添加参数绑定 
-Route::post("/zeyuadminnbvip666520lbwnb/apiinfo", "Admin/HandleController@apiinfo");
+Route::post("/admin/apiinfo", "Admin/HandleController@apiinfo");
 
 //删除参数
-Route::post("/zeyuadminnbvip666520lbwnb/delval", "Admin/HandleController@delval");
+Route::post("/admin/delval", "Admin/HandleController@delval");
 
 //获取参数
-Route::post("/zeyuadminnbvip666520lbwnb/getVal", "Admin/HandleController@getVal");
+Route::post("/admin/getVal", "Admin/HandleController@getVal");
 
 //修改接口
-Route::post("/zeyuadminnbvip666520lbwnb/editapi", "Admin/HandleController@editapi");
+Route::post("/admin/editapi", "Admin/HandleController@editapi");
 
 
 //欢迎页面

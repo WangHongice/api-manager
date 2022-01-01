@@ -1,16 +1,23 @@
 <?php require __DIR__.'/header.html';?>
 
 <section class="content content-boxed">
-    <p class="p-jsxs">欢迎来到食铁兽VIP站！</p>
+    <p class="p-jsxs">欢迎来到
+        <?php echo $web["title"];?>！</p>
     <div class="row row_jsxs" id="listApi">
         <?php if(!empty($list)):
         foreach($list as $k=>$v):?>
         <div class="col-sm-4">
             <a target="_blank" class="block block-link-hover2 ribbon ribbon-modern ribbon-success" href="/doc/<?php echo $v['l_alias'];?>.html">
-                <div class="ribbon-box font-w600">调用：<?php echo $v['l_count'];?></div>
+                <div class="ribbon-box font-w600">调用：
+                    <?php echo $v['l_count'];?>
+                </div>
                 <div class="block-content">
-                    <div class="h4 push-5"><?php echo $v['l_title'];?></div>
-                    <p class="text-muted"><?php echo $v['l_desc'];?></p>
+                    <div class="h4 push-5">
+                        <?php echo $v['l_title'];?>
+                    </div>
+                    <p class="text-muted">
+                        <?php echo $v['l_desc'];?>
+                    </p>
                 </div>
             </a>
         </div>
@@ -19,16 +26,15 @@
     </div>
 </section>
 <script>
-layer.confirm('<b>欢迎来到食铁兽科技！</b>需要购买接口请在右上角点登录！如果没有账号请先注册，在后台自助充值后购买，不会用请看后台首页的教程视频！', {
-  btn: ['点我登录','再看看']
-}, function(){
-  layer.msg('没有账号请先注册！', {
-  icon: 6,
-  time: 1500
-}, function(){
-  window.location.href='/user/login.html'
-});
-}
-);
+    layer.confirm('<b>欢迎来到<?php echo $web["title"];?>！</b>需要购买接口请在右上角点登录！如果没有账号请先注册，在后台自助充值后购买！', {
+        btn: ['点我登录', '再看看']
+    }, function() {
+        layer.msg('没有账号请先注册！', {
+            icon: 6,
+            time: 1500
+        }, function() {
+            window.location.href = '/user/login.html'
+        });
+    });
 </script>
 <?php require __DIR__.'/footer.html';?>

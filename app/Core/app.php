@@ -1,14 +1,15 @@
 <?php
 
 /**
- *	Entry name：项目名称
- *	Description：起始文件
- *	Author：ZERO-ART
- *	Author Url：http://www.lykep.com
- * 	Contact：708298599  656001878
- *	2019-12-25 17:16:22
+ *	API管理系统
+ *	Description：应用载入
+ *	Author：zeyudada ZERO-ART
+ *	Author Url：http://zeyudada.cn http://www.lykep.com
+ * 	E-mail: admin@zeyudada.cn
+ *	2022-1-1 13:56
  */
- //安全
+
+//安全
 require __DIR__ . '/safe.php';
 //引入全局控制常量
 require __DIR__ . '/env.php';

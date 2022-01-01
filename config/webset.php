@@ -6,13 +6,13 @@ return [
    "description" => '在线Q绑查询手机号官网 输入qq号即可查询 还支持反查 拥有16亿数据',
    "time" => '2021/02/14 18:00:00',
    "url1" => 'https://t.me/pandasgkbot',
-   "url2" => 'https://t.me/pandasgk',
+   "url2" => 'https://zeyudada.cn',
    "icp" => 'power by 食铁兽',
    "about" => '<ul class="list-unstyled list-inline"><li>
-    电子邮箱：pandasgk@protonmail.com
+    电子邮箱：admin@zeyudada.cn
     </li><li>
-    电报(tg)：<a href="https://t.me/pandasgkbot">@maniub</a><br>
-    电报群组：<a href="https://t.me/pandasgk">@mnbsgk</a>
+    电报(tg)：<a href="https://t.me/pandasgkbot">@zeyudada</a><br>
+    <a href="https://zeyudada.cn">泽宇引导页</a>
     </li></ul>',
    "target" => 'webinfo',
 ];

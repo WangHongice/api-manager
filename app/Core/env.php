@@ -8,7 +8,7 @@ define('APP_Edition', '1.0');
 /**开启调试模式
  * 
  */
-define('APP_DEBUG', true);
+define('APP_DEBUG', false);
 
 /**
  * 开启数据库

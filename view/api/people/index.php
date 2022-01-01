@@ -66,7 +66,7 @@ class Sql
             'host' => 'localhost',
             'port' => 6603,
             'user' => 'people',
-            'pwd' => '6syPLkDpYBiSLdHi',
+            'pwd' => '密码',
             'name' => 'people',
             'long' => false,
         ];
