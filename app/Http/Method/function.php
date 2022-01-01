@@ -2,9 +2,9 @@
 
 
 //自定义md5
-function api_md5($text, $salt = 'qbapi')
+function api_md5($text, $salt = 'zeyudada')
 {
-    //123456 ba05b7be8feba6afd70a8785e7c10757
+    //123456 5009267d40cfc837a962bf0aa6f4bdde
     $data = md5(md5($text) . $salt);
     return $data;
 }
